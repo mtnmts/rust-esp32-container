@@ -10,7 +10,8 @@ by Yoshinari Nomura.
 
 # Usage
 
-To build your project, run this in the same directory as your Cargo.toml
+To build your project, run this in the same directory as your `Cargo.toml`.
+Your project needs to be mounted in `/code` to build out of the box.
 
 ```bash
 docker run -v $PWD:/code mtnmts/rust-esp32
