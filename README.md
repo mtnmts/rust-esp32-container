@@ -5,7 +5,7 @@ using [llvm-xtensa](https://github.com/espressif/llvm-xtensa) and
 [rust-xtensa](https://github.com/MabezDev).
 
 Most of the steps in this image are based on a 
-(blog post)[http://quickhack.net/nom/blog/2019-05-14-build-rust-environment-for-esp32.html] 
+[blog post](http://quickhack.net/nom/blog/2019-05-14-build-rust-environment-for-esp32.html)
 by Yoshinari Nomura.
 
 # Usage
