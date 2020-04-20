@@ -11,7 +11,7 @@ RUN apt-get install -y wget sudo cmake clang python zlib1g make git \
 ## https://docs.espressif.com/projects/esp-idf/en/latest/get-started/linux-setup.html
 RUN sudo apt-get install -y git wget flex bison gperf python python-pip python-setuptools \
 	python-serial python-click python-cryptography python-future python-pyparsing \
-	python-pyelftools cmake ninja-build ccache libffi-dev libssl-dev
+	python-pyelftools cmake ninja-build ccache libffi-dev libssl-dev 
 
 ## Build LLVM
 ## based on these build instructions
@@ -19,14 +19,13 @@ RUN sudo apt-get install -y git wget flex bison gperf python python-pip python-s
 ENV BUILD_ROOT $HOME/.xtensa
 RUN mkdir -p "${BUILD_ROOT}"
 WORKDIR ${BUILD_ROOT}
-RUN git clone https://github.com/espressif/llvm-xtensa.git --depth 1
-RUN git clone https://github.com/espressif/clang-xtensa.git llvm-xtensa/tools/clang --depth 1
+RUN git clone https://github.com/espressif/llvm-project.git --depth 1
 ENV LLVM_BUILD ${BUILD_ROOT}/llvm_build
 RUN mkdir -p "${LLVM_BUILD}"
 WORKDIR ${LLVM_BUILD}
 ENV CC clang
 ENV CXX clang++
-RUN cmake ../llvm-xtensa -DLLVM_TARGETS_TO_BUILD="Xtensa;X86" -DCMAKE_BUILD_TYPE=Release -G "Ninja"
+RUN cmake ../llvm-project/llvm -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="Xtensa" -DLLVM_TARGETS_TO_BUILD="X86" -DCMAKE_BUILD_TYPE=Release -G "Ninja"
 RUN cmake --build . 
 
 ## Build Rust
