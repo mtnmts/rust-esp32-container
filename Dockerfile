@@ -50,11 +50,15 @@ RUN $HOME/.cargo/bin/rustup toolchain link xtensa ${RUST_BUILD}
 RUN $HOME/.cargo/bin/rustup run xtensa rustc --print target-list | grep xtensa
 
 # Setup ESP-IDF & esptool
-ENV ESP_IDF /xtensa-esp32-elf
+ENV ESP32_IDF /xtensa-esp32-elf
+ENV ESP8266_IDF /xtensa-lx106-elf
 WORKDIR /
 RUN wget https://dl.espressif.com/dl/xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz && \
 	tar xzf xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz && \
-	rm xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz
+	rm xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz && \
+    wget https://dl.espressif.com/dl/xtensa-lx106-elf-linux64-1.22.0-100-ge567ec7-5.2.0.tar.gz && \
+    tar xzf xtensa-lx106-elf-linux64-1.22.0-100-ge567ec7-5.2.0.tar.gz && \
+    rm xtensa-lx106-elf-linux64-1.22.0-100-ge567ec7-5.2.0.tar.gz
 RUN pip install esptool
 	
 ## Setup Xargo
@@ -64,7 +68,7 @@ ENV RUSTC ${RUST_BUILD}/bin/rustc
 
 ## Setup path
 ENV HOME /root
-ENV PATH ${ESP_IDF}/bin:/usr/local/bin:${HOME}/.cargo/bin:$PATH
+ENV PATH ${ESP8266_IDF}/bin:${ESP32_IDF}/bin:/usr/local/bin:${HOME}/.cargo/bin:$PATH
 
 ## test build sample project
 WORKDIR /
