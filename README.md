@@ -1,7 +1,7 @@
 # Rust build environment for ESP32
 
 This image builds the rust compiler toolchain for the Xtensa ISA
-using [llvm-xtensa](https://github.com/espressif/llvm-xtensa) and
+using [llvm-project](https://github.com/espressif/llvm-project) and
 [rust-xtensa](https://github.com/MabezDev).
 
 Most of the steps in this image are based on a 
